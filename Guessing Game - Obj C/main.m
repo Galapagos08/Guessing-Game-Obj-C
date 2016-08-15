@@ -12,10 +12,10 @@ int main(int argc, const char * argv[]) {
     
     int randomNumber = arc4random_uniform(100);
     NSNumber *number = @(randomNumber);
-    NSLog(@"The number is %@.", number);
+    NSLog(@"\n\nThe number is %@.\n\n", number);
+    // remember to delete line 15
     
-    
-    printf("Please enter your guess. Remember, your guess must be from zero to 99.\n\n");
+    printf("\n\nPlease enter your guess. Remember, your guess must be from zero to 99.\n\n");
     fpurge(stdin);
     int guess = -1;
     int error = 5;
@@ -23,15 +23,25 @@ int main(int argc, const char * argv[]) {
         fpurge(stdin);
         error = scanf("%d", &guess);
         if (error != 1 || guess < 0 || guess > 99) {
-            printf("You need to choose a number from 0 to 99.\n\n");
+            printf("\n\nYou need to choose a number from 0 to 99.\n\n");
         }
     }
     if (guess == [number intValue]) {
         NSNumber *number = @(randomNumber);
-        NSLog(@"Congratulations! You correctly guessed the computer's number was %@!\n\n", number);
+        NSLog(@"\n\nCongratulations! You correctly guessed the computer's number was %@!\n\n", number);
+        return 0;
     } else {
-        NSString *incorrectMessage = @"Ooh, sorry. Your guess is not correct.\n\n";
+        NSString *incorrectMessage = @"\n\nOoh, sorry. Your guess is not correct.\nWould you like to make another guess? (1=Y/2=N)\n\n";
         NSLog(@"%@", incorrectMessage);
+        int keepPlaying = 9;
+        fpurge(stdin);
+        while (keepPlaying < 1 || keepPlaying >= 3) {
+            error = scanf("%d", &keepPlaying);
+            if (error != 1 || keepPlaying < 1 || keepPlaying >= 3 ) {
+                printf("Please enter 1 or 2: \n\n");
+            }
+        }
+        return keepPlaying;
     }
     return 0;
 }
