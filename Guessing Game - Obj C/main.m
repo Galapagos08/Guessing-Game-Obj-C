@@ -12,6 +12,8 @@ int main(int argc, const char * argv[]) {
     
     int randomNumber = arc4random_uniform(100);
     NSNumber *number = @(randomNumber);
+    NSLog(@"The number is %@.", number);
+    
     
     printf("Please enter your guess. Remember, your guess must be from zero to 99.\n\n");
     fpurge(stdin);
@@ -24,13 +26,12 @@ int main(int argc, const char * argv[]) {
             printf("You need to choose a number from 0 to 99.\n\n");
         }
     }
-    if (guess == number) {
-        NSString *message = @"Congratulations! You guessed the number!";
-        NSLog(@"%@", message);
+    if (guess == [number intValue]) {
+        NSNumber *number = @(randomNumber);
+        NSLog(@"Congratulations! You correctly guessed the computer's number was %@!\n\n", number);
     } else {
-        NSString *incorrectMessage = @"Ooh, sorry. Your guess is not correct.";
+        NSString *incorrectMessage = @"Ooh, sorry. Your guess is not correct.\n\n";
         NSLog(@"%@", incorrectMessage);
     }
-    
     return 0;
 }
