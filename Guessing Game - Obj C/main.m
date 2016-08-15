@@ -36,7 +36,11 @@ int main(int argc, const char * argv[]) {
                 printf("Please enter 1 or 2: \n\n");
             }
         }
-        return keepPlaying;
+        if (keepPlaying == 1) {
+            getGuessFromUser();
+        } else {
+            return 0;
+        }
     }
     return 0;
 }
