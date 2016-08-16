@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 int getGuessFromUser();
+int miscFunc();
 
 int main(int argc, const char * argv[]) {
     
@@ -21,13 +22,10 @@ int main(int argc, const char * argv[]) {
     NSNumber *userGuess = @(guess);
     if ([userGuess intValue] == [number intValue]) {
         NSLog(@"\n\nCongratulations! You correctly guessed the computer's number was %@!\n\n", number);
-        return 0;
     } else {
-        NSMutableArray *mutableArray = [NSMutableArray array];
-        [mutableArray addObject:userGuess];
         NSString *incorrectMessage = @"\n\nOoh, sorry. Your guess is not correct.\nWould you like to make another guess? (1=Y/2=N)\n\n";
         NSLog(@"%@", incorrectMessage);
-        int keepPlaying = 9;
+        int keepPlaying = 3;
         int error2 = -2;
         fpurge(stdin);
         while (keepPlaying < 1 || keepPlaying >= 3) {
@@ -37,10 +35,13 @@ int main(int argc, const char * argv[]) {
             }
         }
         if (keepPlaying == 1) {
-            getGuessFromUser();
-        } else {
-            return 0;
-        }
+        NSMutableArray *mutableArray = [NSMutableArray array];
+        [mutableArray addObject:userGuess];
+        NSLog(@"You already guessed %@. Now make a different guess.", mutableArray);
+            int secondGuess = -1;
+            secondGuess = getGuessFromUser();
+            NSNumber *Guess = @(secondGuess);
+        [mutableArray addObject:Guess];}
     }
     return 0;
 }
@@ -58,3 +59,5 @@ int getGuessFromUser() {
     }
     return userGuess;
 }
+
+
